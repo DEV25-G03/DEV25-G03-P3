@@ -74,24 +74,64 @@ Debido a la falta de tiempo, hemos decidido a no implenmentar sonido en este poy
 
 # Dinamica
 
-La dinamica del juego consiste en pasar todos las zonas hasta llegar al final, no hay limite de tiempo y la muerte no supone la final del juego.
+La dinamica del juego consiste en interactuar con el mundo virtual en la consecuencio del objetivo principal el cual es tener que parar las veletas hasta alcanzar un maximo de parado de 5 veletas para declararse vencedor de la roda. 
 
 ```mermaid
 flowchart TD
-    n2(["Start"]) --> D["Zone A"]
-    n3["Dead"] --> D
-    D --> n3 & n4["Zone B"]
-    n4 --> n5["Dead"] & n6["Zone C"]
-    n5 --> n7["check point"]
-    n6 --> n8["Dead"] & n9(["Victory"])
-    n7 --> n6 & n5
-    n8 --> n6
-    n3@{ shape: rounded}
-    n4@{ shape: rect}
-    n5@{ shape: rounded}
-    n6@{ shape: rect}
-    n7@{ shape: rect}
-    n8@{ shape: rounded}
+    %% --- Arena ---
+    A0([<b>INICIO</b><br> Arena de combate])
+
+    %% --- Generación ---
+    A1[Jugadores con pistola<br> 2 equipo rojo<br>2 equipo azul]
+    A2[Objetivos<br> 9 veletas]
+    A3[Recursos<br>armas, munición, duchas]
+
+    A0 --> A1
+    A0 --> A2
+    A0 --> A3
+
+    %% --- Jugador ---
+    P1[Inventario de armas]
+    P2[Elegir arma<br>rifle/lanzagranadas]
+    P3{¿Tiene<br> Munición?}
+    P4[Disparo]
+    P5{¿Jugador pringado?}
+    P6[Ir a ducha<br>recuperar limpieza]
+
+    A0 --> P1
+    P1 --> P2 --> P3
+    P3 -- Sí --> P4 --> P5
+    P5 -- Sí --> P6 --> P1
+    P3 -- No --> P1
+    P5 -- No --> P1
+
+    %% --- Veletas ---
+    V1[Veleta<br>barra de pringue]
+    V2[Recibe disparos]
+    V3{¿Veleta parada?}
+    V4[Se pinta del color del equipo]
+    V5[+1 punto para equipo]
+    V6{¿Equipo tiene 5?}
+    V7([Victoria de ronda<br>reinicio arena])
+
+    A2 --> V1
+    P4 --> V2
+    V2 --> V1 --> V3
+    V3 -- Sí --> V4 --> V5 --> V6
+    V3 -- No --> V1
+    V6 -- Sí --> V7
+
+    %% --- IA enemiga ---
+    E1[IA detecta objetivo<br>visión/sonido]
+    E2{¿Veleta o jugador?}
+    E3[Perseguir]
+    E4[Disparo enemigo]
+    E5[Incrementa pringue objetivo]
+
+    A1 --> E1
+    E1 --> E2 --> E3 --> E4 --> E5
+    E5 --> V1
+    E5 --> P5
 ```
 
 ## Objetivo
