@@ -74,7 +74,7 @@ Debido a la falta de tiempo, hemos decidido a no implenmentar sonido en este poy
 
 # Dinamica
 
-La dinamica del juego consiste en interactuar con el mundo virtual en la consecuencio del objetivo principal el cual es tener que parar las veletas hasta alcanzar un maximo de parado de 5 veletas para declararse vencedor de la roda. 
+La dinamica del juego consiste en moverse por una arena 3D pringando veletas y enfrentandose a enemigos mientras se gestionan armas, municion y limpieza; el jugador y los personajes IA (enemigos) compiten y colaboran para detener veletas antes que el equipo rival, equilibrando ataque, defensa y uso estrategico del entorno para obtener ventaja en cada ronda. 
 
 ```mermaid
 flowchart TD
@@ -172,43 +172,73 @@ flowchart TD
 
 ## Objetivo
 
-El objetivo del juego es pasar por todas las pruebas hasta llegar a la corazón del castillo.
+El objetivo principal es tener que parar las veletas hasta alcanzar un maximo de parado de 5 veletas para declararse vencedor de la ronda.
 
 ## Castigo
 
-El jugador puede morirse en el caso de ser golpeado por barriles o balas de cañon, o caido en la agua. Cuando esto pase, volverá al inicio del nivel o al checkpoint depende de la zona que está el jugador.
-Posible mejora (a evaluar)
-Suponiendo parametro de vida, si el avatar muere supondria "game over" y deberia reiniciar desde el principio.
+El castigo en el juego es quedar incapacitado para disparar cuando el jugador recibe demasiado pringue; en ese estado no puede defenderse ni puntuar hasta encontrar una ducha para limpiarse, lo que lo deja vulnerable y retrasa a su equipo. Tambien, inderectamente, perder una veleta frente al rival funciona como castigo estrategico.
 
 # Contenido
 
 A continuación se muestra los componentes del juego.
 
-## Avatar(caracter controlado por el jugador)
+## Avatar jugador (caracter controlado por el jugador)
 
-El clásico maniquí de Unreal Engine que se puede mover y saltar es el avatar que controla el jugador.
+El clásico maniquí de Unreal Engine que se puede mover y saltar, es el avatar que controla el jugador, y empieza con el valor de limpieza de +20.
 
-## Pastillas energéticas
+## Avatar enemigo (caracter controlado por la IA)
 
-Son unos objetos de forma pastilla, cual dará una habilidad de super salto, y se desaparece una vez sido tomada.
+El clásico maniquí de Unreal Engine que se puede mover y saltar, es el avatar que se controla a travez de una Inteligencia artificial, la cual representa al enemigo que debe competir contra el jugador, y empieza con el valor de limpieza de +20.
 
-## El gran lingote dorado
+## Armas 
 
-Es el objeto con cual se gana el jugador.
+Son los recursos con lo que cuenta el jugador para causar daño. las armas del tipo pistola, rifle y lanzagranada, cada una con un nivel de impacto distinto, el cual se menciona a continuacion:
+
+* Pistola, la cual causa un daño de -1.
+* Rifle, la cual causa un daño de -2.
+* Lanzagranada, la cual causa un daño de -5.
+
+## Veletas
+
+Son los objetos identificados como los objetivo principales a parar en el juego, inicialmente inicia con el valor de limpieza de +20.
+
+## Municion
+
+Son los recursos con los que cuenta el jugador para recargar la cantidad de su armamento.
+
+## Duchas
+
+Es el area destinada a la limpieza del jugador, cuando este este totalmente pringado. 
 
 # Contenido
 
-A continuación se muestra las escenas del juego.
+A continuación se muestran las distintas instancias del juego.
 
-## Zona A
+## Instacia Menu Inicio
 
 La primera zona del juego es un exterior con agua y consiste en cruzar el foso del castillo dando saltos sobre gruesos troncos que flotan sobre el agua, moviéndose lentamente bajo nuestros pies. Si el avatar cae al agua, muere pero reaparece al principio
 
 ```mermaid
 flowchart LR
-    A(["Start"]) --> C@{ label: "<span style=\"box-sizing:\">El foso del castillo</span>" }
-    C --> D["La muralla del castillo"]
-    C@{ shape: rect}
+    %% --- Inicio ---
+    A0([<b>INICIO</b>])
+
+    %% --- Menu Inicio ---
+    M1[Menu Inicio]
+    M2{¿jugador = rojo?}
+    M3[Equipo jugador = rojo<br> Equipo enemigo = azul]
+    M4[Equipo jugador = azul<br> Equipo enemigo = rojo]
+
+    A0 --> M1
+    M1 --> M2
+    M2 --> |SI| M3
+    M2 --> |NO| M4
+
+    %% --- Arena ---
+    AC0([Arena de combate])
+
+    M3 --> AC0
+    M4 --> AC0
 ```
 
 ## Zona B
@@ -240,9 +270,9 @@ flowchart LR
 # Video demo
 
 Puede verse en el siguiente enlace de youtube:
-https://youtu.be/oHOIWi1XPm0
+
 
 Puede descargarse en el siguiente enlace:
-https://drive.google.com/drive/folders/14ALIV9pRV7xGzeA53S0Z2yKjn5nXuOZI?usp=sharing
+
 
 
