@@ -78,19 +78,46 @@ La dinamica del juego consiste en interactuar con el mundo virtual en la consecu
 
 ```mermaid
 flowchart TD
-    %% --- Arena ---
-    A0([<b>INICIO</b><br> Arena de combate])
+    %% --- Inicio ---
+    A0([<b>INICIO</b>])
 
+    %% --- Menu Inicio ---
+    M1[Menu Inicio]
+    M2{¿jugador = rojo?}
+    M3[Equipo jugador = rojo<br> Equipo enemigo = azul]
+    M4[Equipo jugador = azul<br> Equipo enemigo = rojo]
+
+    A0 --> M1
+    M1 --> M2
+    M2 --> |SI| M3
+    M2 --> |NO| M4
+
+    %% --- Arena ---
+    AC0([Arena de combate])
+
+    M3 --> AC0
+    M4 --> AC0
+ 
     %% --- Generación ---
-    A1[Jugadores con pistola<br> 2 equipo rojo<br>2 equipo azul]
+    A1[Equipo enemigo]
     A2[Objetivos<br> 9 veletas]
     A3[Recursos<br>armas, munición, duchas]
+    A4[Equipo jugador]
 
-    A0 --> A1
-    A0 --> A2
-    A0 --> A3
+    AC0 --> A1
+    AC0 --> A2
+    AC0 --> A3
+    AC0 --> A4
 
     %% --- Jugador ---
+    J1{¿Veleta o enemigo?}
+    J2[Perseguir]
+    J3[Disparo]
+    J4[Incrementa pringue de enemigo o veleta]
+
+    A4 --> J1 --> J2 --> J3 --> J4 --> V1
+
+    %% --- Enemigo ---
     P1[Inventario de armas]
     P2[Elegir arma<br>rifle/lanzagranadas]
     P3{¿Tiene<br> Munición?}
@@ -98,7 +125,7 @@ flowchart TD
     P5{¿Jugador pringado?}
     P6[Ir a ducha<br>recuperar limpieza]
 
-    A0 --> P1
+    AC0 --> P1
     P1 --> P2 --> P3
     P3 -- Sí --> P4 --> P5
     P5 -- Sí --> P6 --> P1
@@ -112,7 +139,7 @@ flowchart TD
     V4[Se pinta del color del equipo]
     V5[+1 punto para equipo]
     V6{¿Equipo tiene 5?}
-    V7([Victoria de ronda<br>reinicio arena])
+    V7([Victoria de ronda])
 
     A2 --> V1
     P4 --> V2
@@ -125,13 +152,22 @@ flowchart TD
     E1[IA detecta objetivo<br>visión/sonido]
     E2{¿Veleta o jugador?}
     E3[Perseguir]
-    E4[Disparo enemigo]
-    E5[Incrementa pringue objetivo]
+    E4[Disparo]
+    E5[Incrementa pringue de jugador o veleta]
 
     A1 --> E1
     E1 --> E2 --> E3 --> E4 --> E5
     E5 --> V1
     E5 --> P5
+
+    %% --- Menu Fin ---
+    F1([Menu Fin])
+    V7 --> F1
+
+    %% --- Menu Fin ---
+    R1([reinicio arena])
+
+    F1 --> R1
 ```
 
 ## Objetivo
