@@ -56,9 +56,9 @@ El diseño tiene estas secciones:
     - [Castigo](#Castigo)
 - [Mecanica](#Mecanica)
 - [Contenido](#Contenido)
-    - [Zona A](#Zona-A)
-    - [Zona B](#Zona-B)
-    - [Zona C](#Zona-C)
+    - [Intancia Menu Inicio](#Intancia-Menu-Inicio)
+    - [Intancia Equipo Enemigo](#Intancia-Equipo-Enemigo)
+    - [Intancia Equipo Jugador](#Intancia-Equipo-Jugador)
 
 # Estetica
 
@@ -216,7 +216,7 @@ A continuación se muestran las distintas instancias del juego.
 
 ## Instacia Menu Inicio
 
-La primera zona del juego es un exterior con agua y consiste en cruzar el foso del castillo dando saltos sobre gruesos troncos que flotan sobre el agua, moviéndose lentamente bajo nuestros pies. Si el avatar cae al agua, muere pero reaparece al principio
+El juego inicia con un menu de entrada donde el usuario podra perzonalizar caracteristicas del jugador, por ahora solo podra elegir el color que definira el ropaje de su equipo, pero en futura ediciones podrian agregarse otras caracteristicas como nivel de dificultad (facil, intermedio, dificil), sonido (stereo, mono), entre otras, emulando asi un poco mas como realmente se ven los videojuegos.  
 
 ```mermaid
 flowchart LR
@@ -241,24 +241,46 @@ flowchart LR
     M4 --> AC0
 ```
 
-## Zona B
+## Instancia Equipo Enemigo
 
-La segunda zona consiste en escalar la muralla del castillo aprovechando sus salientes, siendo necesario el uso de pastillas para saltar entre ciertas plataformas. Aunque prime la verticalidad, conviene dividir la escalada en partes, de modo que si el avatar cae, sólo tiene que repetir la escalada de la última parte. Algún saliente estará dañado y se romperá si el avatar lo pisa.
+El equipo enemigo compite para ganar la partida, cuenta con una inteligencia artificial integrada que le facilita detectar al equipo del jugador y a las veletas, con lo cual puede acercarse a ellos, perseguirlos y hacer daño pues tambien cuenta con una arma del tipo pistola.
 
 ```mermaid
 flowchart LR
-    D["La muralla del castillo"] --> n1["Escalares o truncos que direge hacia la correzáon el castillo"]
-    n1 --> n2["El corrazón del castillo"]
+    %% --- Arena ---
+    AC0([Arena de combate])
+
+    %% --- IA enemiga ---
+    A1[Equipo enemigo]
+    E1[IA detecta objetivo<br>visión/sonido]
+    E2{¿Veleta o jugador?}
+    E3[Perseguir]
+    E4[Disparo]
+    E5[Incrementa pringue de jugador o veleta]
+
+    AC0 --> A1
+    A1 --> E1
+    E1 --> E2 --> E3 --> E4 --> E5
 ```
 
-## Zona C
+## Instancia Equipo Jugador
 
-La tercera y última zona es un interior y consiste en atravesar las estancias interiores hasta el corazón del castillo, con varias puertas y algunas trampas. No hay “enemigos” como tales, sólo objetos con movimiento que resultan molestos e incluso mortales para el jugador, y las llaves de las puertas mencionadas anteriormente. Si el avatar muere, será necesario repetir la zona. Finalmente al coger el gran lingote dorado en el interior del castillo, la partida termina.
+El equipo del jugador compite para ganar la partida, busca detectar al equipo del jugador y a las veletas, para hacer el maoyr daño posible, inicialmente cuentan con un arma del tipo pistola, pero al recorrer el escenario pueden recoger otras armas con mayor capacidad letal.
 
 ```mermaid
 flowchart LR
-    n2["El corrazón del castillo"] --> n3["Laberinto"]
-    n3 --> n4["El gran lingote dorado, dentro de todo"]
+    %% --- Arena ---
+    AC0([Arena de combate])
+
+    %% --- Jugador ---
+    A4[Equipo jugador]
+    J1{¿Veleta o enemigo?}
+    J2[Perseguir]
+    J3[Disparo]
+    J4[Incrementa pringue de enemigo o veleta]
+
+    AC0 --> A4
+    A4 --> J1 --> J2 --> J3 --> J4
 ```
 
 # Referencia
