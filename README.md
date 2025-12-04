@@ -48,17 +48,24 @@ Y luego extraerlos dentro del archivo **Content**
 
 El diseño tiene estas secciones:
 
-- [Estetica](#Estetica)
-    - [Grafico](#Grafico)
-    - [Sonido](#Sonido)
-- [Dinamica](#Dinamica)
-    - [Objetivo](#Objetivo)
-    - [Castigo](#Castigo)
-- [Mecanica](#Mecanica)
-- [Contenido](#Contenido)
-    - [Intancia Menu Inicio](#Intancia-Menu-Inicio)
-    - [Intancia Equipo Enemigo](#Intancia-Equipo-Enemigo)
-    - [Intancia Equipo Jugador](#Intancia-Equipo-Jugador)
+- [Estetica](#estetica)
+    - [Grafico](#grafico)
+    - [Sonido](#sonido)
+- [Dinamica](#dinamica)
+    - [Objetivo](#objetivo)
+    - [Castigo](#castigo)
+- [Contenido](#contenido)
+    - [Avatar jugador](#avatar-jugador)
+    - [Armas](#armas)
+    - [Veletas](#veletas)
+    - [Municion](#municion)
+    - [Ducha](#ducha)
+- [Mecanica](#mecanica)
+    - [Instancia Menu Inicio](#instancia-menu-inicio)
+    - [Instancia Equipo Enemigo](#instancia-equipo-enemigo)
+    - [Instancia Equipo Jugador](#instancia-equipo-jugador)
+    - [Instancia de Victoria](#instancia-de-victoria)
+
 
 # Estetica
 
@@ -178,7 +185,7 @@ El objetivo principal es tener que parar las veletas hasta alcanzar un maximo de
 
 El castigo en el juego es quedar incapacitado para disparar cuando el jugador recibe demasiado pringue; en ese estado no puede defenderse ni puntuar hasta encontrar una ducha para limpiarse, lo que lo deja vulnerable y retrasa a su equipo. Tambien, inderectamente, perder una veleta frente al rival funciona como castigo estrategico.
 
-# Contenido
+# Componentes
 
 A continuación se muestra los componentes del juego.
 
@@ -206,7 +213,7 @@ Son los objetos identificados como los objetivo principales a parar en el juego,
 
 Son los recursos con los que cuenta el jugador para recargar la cantidad de su armamento.
 
-## Duchas
+## Ducha
 
 Es el area destinada a la limpieza del jugador, cuando este este totalmente pringado. 
 
