@@ -134,7 +134,7 @@ flowchart TD
 
     %% --- Veletas ---
     V1[Veleta<br>barra de pringue]
-    V2[Recibe disparos]
+   
     V3{¿Veleta parada?}
     V4[Se pinta del color del equipo]
     V5[+1 punto para equipo]
@@ -142,8 +142,8 @@ flowchart TD
     V7([Victoria de ronda])
 
     A2 --> V1
-    P4 --> V2
-    V2 --> V1 --> V3
+    P4 --> V1 --> V3
+    
     V3 -- Sí --> V4 --> V5 --> V6
     V3 -- No --> V1
     V6 -- Sí --> V7
@@ -265,7 +265,7 @@ flowchart LR
 
 ## Instancia Equipo Jugador
 
-El equipo del jugador compite para ganar la partida, busca detectar al equipo del jugador y a las veletas, para hacer el maoyr daño posible, inicialmente cuentan con un arma del tipo pistola, pero al recorrer el escenario pueden recoger otras armas con mayor capacidad letal.
+El equipo del jugador compite para ganar la partida, busca detectar al equipo del jugador y a las veletas, para hacer el mayor daño posible, inicialmente cuentan con un arma del tipo pistola, pero al recorrer el escenario pueden recoger otras armas con mayor capacidad letal.
 
 ```mermaid
 flowchart LR
@@ -283,11 +283,33 @@ flowchart LR
     A4 --> J1 --> J2 --> J3 --> J4
 ```
 
+## Instancia de Victoria
+
+La victoria de la partida depende de que equipo consigue parar 5 veletas primero, o el mayor numero de veletas en el tiempo establecido de 5 minutos. 
+
+```mermaid
+flowchart LR
+   %% --- Veletas ---
+    P4[Disparo]
+    V1[Veleta<br>barra de pringue]
+    V3{¿Veleta parada?}
+    V4[Se pinta del color del equipo]
+    V5[+1 punto para equipo]
+    V6{¿Equipo tiene 5?}
+    V7([Victoria de ronda])
+
+    P4 --> V1 --> V3
+    
+    V3 -- Sí --> V4 --> V5 --> V6
+    V3 -- No --> V1
+    V6 -- Sí --> V7
+```
+
 # Referencia
 
-[Fūun! Takeshi Jō]( https://narratech.com/es/desarrollo-de-videojuegos-25-26/)
+[Historia del paintball](https://es.wikipedia.org/wiki/Paintball)
 
-[Castle - Base](https://github.com/narratech/castle-base)
+[Enunciado de la practica](https://narratech.com/es/desarrollo-de-videojuegos/herramientas/pringa-veletas/)
 
 # Video demo
 
