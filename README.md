@@ -185,7 +185,7 @@ El objetivo principal es tener que parar las veletas hasta alcanzar un maximo de
 
 El castigo en el juego es quedar incapacitado para disparar cuando el jugador recibe demasiado pringue; en ese estado no puede defenderse ni puntuar hasta encontrar una ducha para limpiarse, lo que lo deja vulnerable y retrasa a su equipo. Tambien, inderectamente, perder una veleta frente al rival funciona como castigo estrategico.
 
-# Componentes
+# Contenido
 
 A continuación se muestra los componentes del juego.
 
@@ -217,7 +217,7 @@ Son los recursos con los que cuenta el jugador para recargar la cantidad de su a
 
 Es el area destinada a la limpieza del jugador, cuando este este totalmente pringado. 
 
-# Contenido
+# Mecanica
 
 A continuación se muestran las distintas instancias del juego.
 
