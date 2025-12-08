@@ -73,3 +73,23 @@ Plugins/**/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+
+# Resources that are not formed as part of the practice
+Content/Characters
+Content/Collections
+Content/Developers
+Content/LevelPrototyping
+Content/ThirdPerson
+Content/Variant_Platforming
+Content/__ExternalActors__
+Content/__ExternalObjects__
+Content/StarterContent
+Content/Weapons
+Content/Variant_Shooter
+Content/Input
+Content/FirstPerson
+
+
+Saved
+Intermediate
+DerivedDataCache
