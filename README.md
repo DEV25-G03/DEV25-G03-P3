@@ -39,8 +39,10 @@ Para este proyecto hace falta descargar los ficheros ZIP:
 
 - Characters
 - LevelPrototyping
-- ThirdPerson
-- Variant_Platforming
+- FirstPerson
+- Input
+- Weapons
+- Variant_Shooter
 
 Y luego extraerlos dentro del archivo **Content**
  
